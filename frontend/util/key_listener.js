@@ -1,17 +1,25 @@
 var KeyActions = require('../actions/key_actions'),
     KEYMAP = require('../constants/key_map');
 
+var _pressState = {};
+
 var addKeyListeners = function() {
   var $document = $(document);
 
-  $document.on('keyup', function(event){
-    // KeyActions.releaseKey(KEYMAP[event.keyCode]);
-    console.log(KEYMAP[event.keyCode]);
+  $document.keydown(function(event){
+    if (!_pressState[event.keyCode] && KEYMAP[event.keyCode]){
+      // KeyActions.pressKey(KEYMAP[event.keyCode]);
+      console.log('keydown ' + KEYMAP[event.keyCode]);
+      _pressState[event.keyCode] = true;
+    }
   });
 
-  $document.on('keydown', function(event){
-    // KeyActions.pressKey(KEYMAP[event.keyCode]);
-    console.log(KEYMAP[event.keyCode]);
+  $document.keyup(function(event){
+    if (_pressState[event.keyCode]){
+      // KeyActions.releaseKey(KEYMAP[event.keyCode]);
+      console.log('keyup ' + KEYMAP[event.keyCode]);
+      _pressState[event.keyCode] = false;
+    }
   });
 };
 
