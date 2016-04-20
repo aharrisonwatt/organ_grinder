@@ -8,16 +8,16 @@ var addKeyListeners = function() {
 
   $document.keydown(function(event){
     if (!_pressState[event.keyCode] && KEYMAP[event.keyCode]){
-      // KeyActions.pressKey(KEYMAP[event.keyCode]);
-      console.log('keydown ' + KEYMAP[event.keyCode]);
+      KeyActions.keyPressed(KEYMAP[event.keyCode]);
+
       _pressState[event.keyCode] = true;
     }
   });
 
   $document.keyup(function(event){
     if (_pressState[event.keyCode]){
-      // KeyActions.releaseKey(KEYMAP[event.keyCode]);
-      console.log('keyup ' + KEYMAP[event.keyCode]);
+      KeyActions.keyReleased(KEYMAP[event.keyCode]);
+
       _pressState[event.keyCode] = false;
     }
   });
