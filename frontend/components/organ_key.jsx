@@ -4,6 +4,10 @@ var React = require('react'),
     TONES = require('../constants/tones');
 
 var OrganKey = React.createClass({
+  getInitialState: function() {
+    return {isPlaying: false};
+  },
+
   componentDidMount: function() {
     var frequency = TONES[this.props.noteName];
     this.note = new Note(frequency);
@@ -14,14 +18,18 @@ var OrganKey = React.createClass({
   _handleChange: function() {
     if (KeyStore.isPlaying(this.props.noteName)){
       this.note.start();
+      this.setState({isPlaying: true});
     }else{
       this.note.stop();
+      this.setState({isPlaying: false});
     }
   },
 
   render: function(){
-    return(
-      <div>Hello World I am a Note</div>
+    var className = this.state.isPlaying ? "pressed" : "unpressed";
+
+    return (
+      <div className={className}>{this.props.noteName}</div>
     );
   }
 
