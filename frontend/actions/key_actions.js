@@ -1,17 +1,17 @@
 var dispatcher = require("../dispatcher/dispatcher");
 
 var KeyActions = {
-  keyPressed: function(note) {
+  keyPressed: function(noteName) {
     dispatcher.dispatch({
       actionType: "REGISTER_NOTE",
-      note: note
+      noteName: noteName
     });
   },
 
-  keyReleased: function(note) {
+  keyReleased: function(noteName) {
     dispatcher.dispatch({
       actionType: "UNREGISTER_NOTE",
-      note: note
+      noteName: noteName
     });
   }
 };
