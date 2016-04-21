@@ -8,7 +8,7 @@ var addKeyListeners = function() {
 
   $document.keydown(function(event){
     if (!_pressState[event.keyCode] && KEYMAP[event.keyCode]){
-      KeyActions.keyPressed(KEYMAP[event.keyCode]);
+      KeyActions.keyPressed([KEYMAP[event.keyCode]]);
 
       _pressState[event.keyCode] = true;
     }
@@ -16,7 +16,7 @@ var addKeyListeners = function() {
 
   $document.keyup(function(event){
     if (_pressState[event.keyCode]){
-      KeyActions.keyReleased(KEYMAP[event.keyCode]);
+      KeyActions.keyReleased([KEYMAP[event.keyCode]]);
 
       _pressState[event.keyCode] = false;
     }

@@ -7,12 +7,12 @@ var KeyStore = new Store(dispatcher);
 // API
 KeyStore.__onDispatch = function (payload) {
   switch (payload.actionType) {
-    case "REGISTER_NOTE":
-      addNote(payload.noteName);
+    case "REGISTER_NOTES":
+      addNotes(payload.notes);
       this.__emitChange();
       break;
-    case "UNREGISTER_NOTE":
-      removeNote(payload.noteName);
+    case "UNREGISTER_NOTES":
+      removeNotes(payload.notes);
       this.__emitChange();
       break;
   }
@@ -27,12 +27,14 @@ KeyStore.isPlaying = function (noteName) {
 };
 
 // private methods
-function addNote(noteName) {
-  _keys.push(noteName);
+function addNotes(notes) {
+  _keys = _keys.concat(notes);
 }
 
-function removeNote(noteName) {
-  _keys.splice(_keys.indexOf(noteName), 1);
+function removeNotes(notes) {
+  notes.forEach(function(note){
+    _keys.splice(_keys.indexOf(note), 1);
+  });
 }
 
 module.exports = KeyStore;
